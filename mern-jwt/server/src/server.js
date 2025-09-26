@@ -13,6 +13,4 @@ app.get("/", (_req, res) => {
   res.json({ server: true });
 });
 
-module.exports = {
-  app,
-};
+module.exports = app;
