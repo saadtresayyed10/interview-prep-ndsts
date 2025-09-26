@@ -8,7 +8,7 @@ const createGameController = async (req, res) => {
   }
 
   try {
-    const game = await gameServices.createGame({ title, genre, lore, ratings });
+    const game = await gameServices.createGame(title, genre, lore, ratings);
     res.status(201).json({ message: "Game created", data: game });
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -17,7 +17,7 @@ const createGameController = async (req, res) => {
 
 const getAllGamesController = async (_req, res) => {
   try {
-    const game = gameServices.getAllGames();
+    const game = await gameServices.getAllGames();
     res.status(200).json({ data: game });
   } catch (error) {
     res.status(500).json({ message: error.message });
