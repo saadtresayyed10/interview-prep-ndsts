@@ -1,7 +1,7 @@
 const Game = require("../../model/Game");
 
 const createGame = async (title, genre, lore, ratings) => {
-  const exitingGame = await Game.findOne(title);
+  const exitingGame = await Game.findOne({ title });
 
   if (exitingGame) throw new Error("Game already exists");
 

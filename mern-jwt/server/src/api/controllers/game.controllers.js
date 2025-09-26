@@ -3,14 +3,12 @@ const gameServices = require("../services/game.services");
 const createGameController = async (req, res) => {
   const { title, genre, lore, ratings } = req.body;
 
-  const data = { title, genre, lore, ratings };
-
-  if (!data) {
-    res.status(404).json({ message: "Required fields are missing" });
+  if (!title || !genre || !ratings) {
+    return res.status(400).json({ message: "Required fields are missing" });
   }
 
   try {
-    const game = gameServices.createGame(data);
+    const game = await gameServices.createGame({ title, genre, lore, ratings });
     res.status(201).json({ message: "Game created", data: game });
   } catch (error) {
     res.status(400).json({ message: error.message });
