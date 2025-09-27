@@ -17,11 +17,19 @@ const getGameById = async (id) => {
 };
 
 const updateGame = async (id, title, genre, lore, ratings) => {
-  const existingGame = await Game.findOne({ title });
+  const existingGame = await Game.findOne({ _id: id });
 
   if (!existingGame) throw new Error("Game do not exist");
 
   return await Game.findByIdAndUpdate(id, { title, genre, lore, ratings });
+};
+
+const deleteGame = async (id) => {
+  const existingGame = await Game.findOne({ _id: id });
+
+  if (!existingGame) throw new Error("Game do not exist");
+
+  return await Game.findByIdAndDelete(id);
 };
 
 module.exports = {
@@ -29,4 +37,5 @@ module.exports = {
   getAllGames,
   getGameById,
   updateGame,
+  deleteGame,
 };

@@ -2,7 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const connectToDB = require("./config/db");
-const gameRoutes = require("./api/routes/game.services");
+const gameRoutes = require("./api/routes/game.routes");
 
 dotenv.config();
 

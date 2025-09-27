@@ -7,5 +7,6 @@ gameRoutes.post("/", gameControllers.createGameController);
 gameRoutes.get("/", gameControllers.getAllGamesController);
 gameRoutes.get("/:id", gameControllers.getGameByIdController);
 gameRoutes.put("/:id", gameControllers.updateGamedController);
+gameRoutes.delete("/:id", gameControllers.deleteGameController);
 
 module.exports = gameRoutes;
