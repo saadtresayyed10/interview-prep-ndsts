@@ -30,8 +30,8 @@ const loginUserController = async (req, res) => {
   }
 };
 
-const logoutUserController = async (req, res) => {
-  req.clearCookie("token");
+const logoutUserController = async (_req, res) => {
+  res.clearCookie("token");
   res.status(200).json({ message: "User logged out" });
 };
 

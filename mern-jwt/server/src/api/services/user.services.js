@@ -25,7 +25,15 @@ const loginUser = async (email, password) => {
   return { token, user };
 };
 
+const getProfile = async (id) => {
+  const user = await User.findOne({ _id: id });
+  if (!user) throw new Error("User not found");
+
+  return await User.find();
+};
+
 module.exports = {
   registerUser,
   loginUser,
+  getProfile,
 };
