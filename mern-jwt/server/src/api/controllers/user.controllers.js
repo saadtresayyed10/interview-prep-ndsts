@@ -35,8 +35,24 @@ const logoutUserController = async (_req, res) => {
   res.status(200).json({ message: "User logged out" });
 };
 
+const getProfileController = async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(404).json({ message: "ID not found in params" });
+  }
+
+  try {
+    const profile = await userServices.getProfile(id);
+    res.status(200).json({ data: profile });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   registerUserController,
   loginUserController,
   logoutUserController,
+  getProfileController,
 };
