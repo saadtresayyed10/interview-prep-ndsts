@@ -24,7 +24,23 @@ const getAllGamesController = async (_req, res) => {
   }
 };
 
+const getGameByIdController = async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(404).json({ message: "ID not found in params" });
+  }
+
+  try {
+    const game = await gameServices.getGameById(id);
+    res.status(200).json({ data: game });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   createGameController,
   getAllGamesController,
+  getGameByIdController,
 };
