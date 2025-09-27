@@ -3,7 +3,7 @@ const Game = require("../../model/Game");
 const createGame = async (title, genre, lore, ratings) => {
   const existingGame = await Game.findOne({ title });
 
-  if (existingGame) throw new Error("Game already exists");
+  if (existingGame) throw new Error("Game already exist");
 
   return await Game.create({ title, genre, lore, ratings });
 };
@@ -16,8 +16,17 @@ const getGameById = async (id) => {
   return await Game.findById(id);
 };
 
+const updateGame = async (id, title, genre, lore, ratings) => {
+  const existingGame = await Game.findOne({ title });
+
+  if (!existingGame) throw new Error("Game do not exist");
+
+  return await Game.findByIdAndUpdate(id, { title, genre, lore, ratings });
+};
+
 module.exports = {
   createGame,
   getAllGames,
   getGameById,
+  updateGame,
 };

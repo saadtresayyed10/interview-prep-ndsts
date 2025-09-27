@@ -39,8 +39,25 @@ const getGameByIdController = async (req, res) => {
   }
 };
 
+const updateGamedController = async (req, res) => {
+  const { id } = req.params;
+  const { title, genre, lore, ratings } = req.body;
+
+  if (!id) {
+    return res.status(404).json({ message: "ID not found in params" });
+  }
+
+  try {
+    const game = await gameServices.updateGame(id, title, genre, lore, ratings);
+    res.status(200).json({ message: "Game updated", data: game });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   createGameController,
   getAllGamesController,
   getGameByIdController,
+  updateGamedController,
 };
