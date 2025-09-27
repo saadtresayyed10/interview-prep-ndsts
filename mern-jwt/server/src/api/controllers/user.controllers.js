@@ -15,6 +15,28 @@ const registerUserController = async (req, res) => {
   }
 };
 
+const loginUserController = async (req, res) => {
+  const { email, password } = req.body;
+  const { token, user } = await userServices.loginUser(email, password);
+  try {
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+    });
+    res.status(200).json({ message: "User logged in", token, user });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const logoutUserController = async (req, res) => {
+  req.clearCookie("token");
+  res.status(200).json({ message: "User logged out" });
+};
+
 module.exports = {
   registerUserController,
+  loginUserController,
+  logoutUserController,
 };
